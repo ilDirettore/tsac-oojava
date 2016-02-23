@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BinaryOperator;
 import java.util.function.ToDoubleFunction;
 
 public class Main {
@@ -58,24 +59,9 @@ public class Main {
 			ps.next();
 		}
 		
-		Iterator<Double> it = values.iterator();
-		double max = 0;
+		System.out.println("temperatura MAX: " + values.stream().max((d1, d2) -> Double.compare(d1, d2)));
 		
-		while(it.hasNext()) {
-			double corrente = it.next();
-			if (corrente > max)
-				max = corrente; 
-		}
-		
-		System.out.println("temperatura MAX: " + max);
-		
-		it = values.iterator();
-		double sum = 0;
-		while(it.hasNext()) {
-			sum += it.next();
-		}
-		double avg = sum / values.size();
-		System.out.println("media valori: " + avg);
+		System.out.println("media valori: " + values.stream().reduce((acc, d) -> acc + d).get() / values.size());
 		
 		System.out.println("errori: " + errors.entrySet());
 		
